@@ -123,6 +123,21 @@ export class LibroComponent {
     );
   }
 
+eliminar(indice: number) {
+  const confirmar = confirm(
+    '¿Está seguro de eliminar este libro?'
+  );
+
+  if (!confirmar) {
+    return;
+  }
+
+  this.libros.splice(indice, 1);
+  this.guardarEnLocalStorage();
+  this.limpiar();
+  this.mensaje = 'Libro eliminado correctamente';
+}
+
   cerrarSesion() {
     localStorage.removeItem('sesionBiblioteca');
     this.router.navigate(['/login']);
