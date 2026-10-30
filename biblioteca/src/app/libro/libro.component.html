@@ -6,6 +6,35 @@
     Cerrar sesión
   </button>
 
+  <h2>Registrar libro</h2>
+
+  <form (ngSubmit)="guardar()">
+
+    <label for="codigo">Código</label>
+    <input id="codigo" name="codigo" type="text"
+      [(ngModel)]="codigo" required>
+
+    <label for="titulo">Título</label>
+    <input id="titulo" name="titulo" type="text"
+      [(ngModel)]="titulo" required>
+
+    <label for="autor">Autor</label>
+    <input id="autor" name="autor" type="text"
+      [(ngModel)]="autor" required>
+
+    <label for="anio">Año</label>
+    <input id="anio" name="anio" type="number"
+      min="1000" max="9999" step="1"
+      [(ngModel)]="anio" required>
+
+    <button type="submit">Guardar</button>
+
+    <button type="button" (click)="limpiar()">
+      Limpiar
+    </button>
+
+  </form>
+
   <h2>Libros registrados</h2>
   <p>Total: {{ libros.length }}</p>
 
@@ -38,4 +67,5 @@
       </table>
     </div>
   }
+
 </main>
