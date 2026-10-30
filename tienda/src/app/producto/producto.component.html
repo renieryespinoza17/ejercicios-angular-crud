@@ -6,34 +6,40 @@
     Cerrar sesión
   </button>
 
-  <h2>Registrar producto</h2>
+  @if (indiceEditar === -1) {
+    <h2>Registrar producto</h2>
+  } @else {
+    <h2>Editar producto</h2>
+  }
 
   <form (ngSubmit)="guardar()">
 
     <label for="codigo">Código</label>
-    <input id="codigo" name="codigo"
-      type="text"
+    <input id="codigo" name="codigo" type="text"
       [(ngModel)]="codigo" required>
 
     <label for="nombre">Nombre</label>
-    <input id="nombre" name="nombre"
-      type="text"
+    <input id="nombre" name="nombre" type="text"
       [(ngModel)]="nombre" required>
 
     <label for="precio">Precio (L)</label>
-    <input id="precio" name="precio"
-      type="number" min="0.01" step="any"
+    <input id="precio" name="precio" type="number"
+      min="0.01" step="any"
       [(ngModel)]="precio" required>
 
     <label for="existencias">Existencias</label>
-    <input id="existencias" name="existencias"
-      type="number" min="0" step="1"
+    <input id="existencias" name="existencias" type="number"
+      min="0" step="1"
       [(ngModel)]="existencias" required>
 
-    <button type="submit">Guardar</button>
+    @if (indiceEditar === -1) {
+      <button type="submit">Guardar</button>
+    } @else {
+      <button type="submit">Actualizar</button>
+    }
 
     <button type="button" (click)="limpiar()">
-      Limpiar
+      {{ indiceEditar === -1 ? 'Limpiar' : 'Cancelar' }}
     </button>
 
   </form>
@@ -43,7 +49,6 @@
   }
 
   <h2>Productos registrados</h2>
-
   <p>Total: {{ productos.length }}</p>
 
   @if (productos.length === 0) {
@@ -58,17 +63,23 @@
             <th>Nombre</th>
             <th>Precio (L)</th>
             <th>Existencias</th>
+            <th>Acciones</th>
           </tr>
         </thead>
 
         <tbody>
-          @for (producto of productos; track producto.id) {
+          @for (producto of productos; track producto.id; let i = $index) {
             <tr>
               <td>{{ producto.id }}</td>
               <td>{{ producto.codigo }}</td>
               <td>{{ producto.nombre }}</td>
               <td>L {{ producto.precio.toFixed(2) }}</td>
               <td>{{ producto.existencias }}</td>
+              <td>
+                <button type="button" (click)="editar(i)">
+                  Editar
+                </button>
+              </td>
             </tr>
           }
         </tbody>

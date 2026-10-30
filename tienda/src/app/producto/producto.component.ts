@@ -26,6 +26,7 @@ export class ProductoComponent {
   precio: number | null = null;
   existencias: number | null = null;
 
+  indiceEditar = -1;
   mensaje = '';
 
   constructor(private router: Router) {
@@ -39,6 +40,15 @@ export class ProductoComponent {
     if (datos !== null) {
       this.productos = JSON.parse(datos);
     }
+  }
+
+  editar(indice: number) {
+    this.indiceEditar = indice;
+    this.codigo = this.productos[indice].codigo;
+    this.nombre = this.productos[indice].nombre;
+    this.precio = this.productos[indice].precio;
+    this.existencias = this.productos[indice].existencias;
+    this.mensaje = '';
   }
 
   guardar() {
@@ -65,35 +75,49 @@ export class ProductoComponent {
       return;
     }
 
-    let nuevoId = 1;
+    if (this.indiceEditar === -1) {
+      let nuevoId = 1;
 
-    for (const producto of this.productos) {
-      if (producto.id >= nuevoId) {
-        nuevoId = producto.id + 1;
+      for (const producto of this.productos) {
+        if (producto.id >= nuevoId) {
+          nuevoId = producto.id + 1;
+        }
       }
+
+      const nuevoProducto: Producto = {
+        id: nuevoId,
+        codigo: this.codigo.trim(),
+        nombre: this.nombre.trim(),
+        precio: this.precio,
+        existencias: this.existencias
+      };
+
+      this.productos.push(nuevoProducto);
+      this.mensaje = 'Producto registrado correctamente';
+
+    } else {
+      this.productos[this.indiceEditar].codigo = this.codigo.trim();
+      this.productos[this.indiceEditar].nombre = this.nombre.trim();
+      this.productos[this.indiceEditar].precio = this.precio;
+      this.productos[this.indiceEditar].existencias = this.existencias;
+
+      this.mensaje = 'Producto actualizado correctamente';
     }
 
-    const nuevoProducto: Producto = {
-      id: nuevoId,
-      codigo: this.codigo.trim(),
-      nombre: this.nombre.trim(),
-      precio: this.precio,
-      existencias: this.existencias
-    };
-
-    this.productos.push(nuevoProducto);
-
     this.guardarEnLocalStorage();
-    this.limpiar();
-
-    this.mensaje = 'Producto registrado correctamente';
+    this.limpiar(false);
   }
 
-  limpiar() {
+  limpiar(borrarMensaje = true) {
     this.codigo = '';
     this.nombre = '';
     this.precio = null;
     this.existencias = null;
+    this.indiceEditar = -1;
+
+    if (borrarMensaje) {
+      this.mensaje = '';
+    }
   }
 
   guardarEnLocalStorage() {
