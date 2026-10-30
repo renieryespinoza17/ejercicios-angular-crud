@@ -125,6 +125,24 @@ export class EstudianteComponent {
     );
   }
 
+
+  
+eliminar(indice: number) {
+  const confirmar = confirm(
+    '¿Está seguro de eliminar este estudiante?'
+  );
+
+  if (!confirmar) {
+    return;
+  }
+
+  this.estudiantes.splice(indice, 1);
+  this.guardarEnLocalStorage();
+  this.limpiar();
+
+  this.mensaje = 'Estudiante eliminado correctamente';
+}
+
   cerrarSesion() {
     localStorage.removeItem('sesionEstudiantes');
     this.router.navigate(['/login']);
