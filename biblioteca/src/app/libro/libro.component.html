@@ -34,7 +34,9 @@
     </button>
 
   </form>
-
+    @if (mensaje !== '') {
+    <p>{{ mensaje }}</p>
+        }
   <h2>Libros registrados</h2>
   <p>Total: {{ libros.length }}</p>
 

@@ -20,7 +20,7 @@ interface Libro {
 export class LibroComponent {
 
   libros: Libro[] = [];
-
+  mensaje = '';
   codigo = '';
   titulo = '';
   autor = '';
@@ -76,8 +76,9 @@ export class LibroComponent {
     };
 
     this.libros.push(nuevoLibro);
-    this.guardarEnLocalStorage();
-    this.limpiar();
+  this.guardarEnLocalStorage();
+  this.limpiar();
+  this.mensaje = 'Libro registrado correctamente';
   }
 
   limpiar() {
