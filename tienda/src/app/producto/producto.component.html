@@ -6,6 +6,42 @@
     Cerrar sesión
   </button>
 
+  <h2>Registrar producto</h2>
+
+  <form (ngSubmit)="guardar()">
+
+    <label for="codigo">Código</label>
+    <input id="codigo" name="codigo"
+      type="text"
+      [(ngModel)]="codigo" required>
+
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre"
+      type="text"
+      [(ngModel)]="nombre" required>
+
+    <label for="precio">Precio (L)</label>
+    <input id="precio" name="precio"
+      type="number" min="0.01" step="any"
+      [(ngModel)]="precio" required>
+
+    <label for="existencias">Existencias</label>
+    <input id="existencias" name="existencias"
+      type="number" min="0" step="1"
+      [(ngModel)]="existencias" required>
+
+    <button type="submit">Guardar</button>
+
+    <button type="button" (click)="limpiar()">
+      Limpiar
+    </button>
+
+  </form>
+
+  @if (mensaje !== '') {
+    <p>{{ mensaje }}</p>
+  }
+
   <h2>Productos registrados</h2>
 
   <p>Total: {{ productos.length }}</p>
