@@ -126,6 +126,23 @@ export class ProductoComponent {
       JSON.stringify(this.productos)
     );
   }
+    
+eliminar(indice: number) {
+  const confirmar = confirm(
+    '¿Está seguro de eliminar este producto?'
+  );
+
+  if (!confirmar) {
+    return;
+  }
+
+  this.productos.splice(indice, 1);
+  this.guardarEnLocalStorage();
+  this.limpiar();
+
+  this.mensaje = 'Producto eliminado correctamente';
+}
+
 
   cerrarSesion() {
     localStorage.removeItem('sesionTienda');

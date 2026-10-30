@@ -75,11 +75,17 @@
               <td>{{ producto.nombre }}</td>
               <td>L {{ producto.precio.toFixed(2) }}</td>
               <td>{{ producto.existencias }}</td>
-              <td>
-                <button type="button" (click)="editar(i)">
-                  Editar
-                </button>
-              </td>
+              
+<td>
+  <button type="button" (click)="editar(i)">
+    Editar
+  </button>
+
+  <button type="button" (click)="eliminar(i)">
+    Eliminar
+  </button>
+</td>
+
             </tr>
           }
         </tbody>
