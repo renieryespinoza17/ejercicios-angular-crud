@@ -6,9 +6,37 @@
     Cerrar sesión
   </button>
 
-  <h2>Listado de tareas</h2>
+  <h2>Tareas registradas</h2>
 
-  <p>
-    Los registros se agregarán en la siguiente etapa.
-  </p>
+  <p>Total: {{ tareas.length }}</p>
+
+  @if (tareas.length === 0) {
+    <p>No hay tareas registradas.</p>
+  } @else {
+    <div class="tabla">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Fecha límite</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (tarea of tareas; track tarea.id) {
+            <tr>
+              <td>{{ tarea.id }}</td>
+              <td>{{ tarea.titulo }}</td>
+              <td>{{ tarea.descripcion }}</td>
+              <td>{{ tarea.fechaLimite }}</td>
+              <td>{{ tarea.estado }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
 </main>
