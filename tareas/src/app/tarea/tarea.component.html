@@ -6,7 +6,11 @@
     Cerrar sesión
   </button>
 
-  <h2>Registrar tarea</h2>
+  @if (indiceEditar === -1) {
+    <h2>Registrar tarea</h2>
+  } @else {
+    <h2>Editar tarea</h2>
+  }
 
   <form (ngSubmit)="guardar()">
 
@@ -47,12 +51,14 @@
       <option value="Completada">Completada</option>
     </select>
 
-    <button type="submit">
-      Guardar
-    </button>
+    @if (indiceEditar === -1) {
+      <button type="submit">Guardar</button>
+    } @else {
+      <button type="submit">Actualizar</button>
+    }
 
     <button type="button" (click)="limpiar()">
-      Limpiar
+      {{ indiceEditar === -1 ? 'Limpiar' : 'Cancelar' }}
     </button>
 
   </form>
@@ -77,17 +83,24 @@
             <th>Descripción</th>
             <th>Fecha límite</th>
             <th>Estado</th>
+            <th>Acciones</th>
           </tr>
         </thead>
 
         <tbody>
-          @for (tarea of tareas; track tarea.id) {
+          @for (tarea of tareas; track tarea.id; let i = $index) {
             <tr>
               <td>{{ tarea.id }}</td>
               <td>{{ tarea.titulo }}</td>
               <td>{{ tarea.descripcion }}</td>
               <td>{{ tarea.fechaLimite }}</td>
               <td>{{ tarea.estado }}</td>
+
+              <td>
+                <button type="button" (click)="editar(i)">
+                  Editar
+                </button>
+              </td>
             </tr>
           }
         </tbody>
