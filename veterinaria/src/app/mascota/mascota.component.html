@@ -6,6 +6,60 @@
     Cerrar sesión
   </button>
 
+  <h2>Registrar mascota</h2>
+
+  <form (ngSubmit)="guardar()">
+
+    <label for="nombre">Nombre de la mascota</label>
+    <input
+      id="nombre"
+      name="nombre"
+      type="text"
+      [(ngModel)]="nombre"
+      required
+    >
+
+    <label for="especie">Especie</label>
+    <input
+      id="especie"
+      name="especie"
+      type="text"
+      [(ngModel)]="especie"
+      required
+    >
+
+    <label for="edad">Edad</label>
+    <input
+      id="edad"
+      name="edad"
+      type="number"
+      min="0"
+      step="1"
+      [(ngModel)]="edad"
+      required
+    >
+
+    <label for="propietario">Propietario</label>
+    <input
+      id="propietario"
+      name="propietario"
+      type="text"
+      [(ngModel)]="propietario"
+      required
+    >
+
+    <button type="submit">Guardar</button>
+
+    <button type="button" (click)="limpiar()">
+      Limpiar
+    </button>
+
+  </form>
+
+  @if (mensaje !== '') {
+    <p>{{ mensaje }}</p>
+  }
+
   <h2>Mascotas registradas</h2>
 
   <p>Total: {{ mascotas.length }}</p>
