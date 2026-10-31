@@ -26,6 +26,7 @@ export class MascotaComponent {
   edad: number | null = null;
   propietario = '';
 
+  indiceEditar = -1;
   mensaje = '';
 
   constructor(private router: Router) {
@@ -60,6 +61,17 @@ export class MascotaComponent {
     }
   }
 
+  editar(indice: number) {
+    this.indiceEditar = indice;
+
+    this.nombre = this.mascotas[indice].nombre;
+    this.especie = this.mascotas[indice].especie;
+    this.edad = this.mascotas[indice].edad;
+    this.propietario = this.mascotas[indice].propietario;
+
+    this.mensaje = '';
+  }
+
   guardar() {
     if (
       this.nombre.trim() === '' ||
@@ -69,38 +81,65 @@ export class MascotaComponent {
       !Number.isInteger(this.edad) ||
       this.edad < 0
     ) {
-      alert('Complete correctamente todos los campos. La edad debe ser un número entero mayor o igual a cero.');
+      alert(
+        'Complete todos los campos. La edad debe ser un número entero mayor o igual a cero.'
+      );
       return;
     }
 
-    let nuevoId = 1;
+    if (this.indiceEditar === -1) {
 
-    for (const mascota of this.mascotas) {
-      if (mascota.id >= nuevoId) {
-        nuevoId = mascota.id + 1;
+      let nuevoId = 1;
+
+      for (const mascota of this.mascotas) {
+        if (mascota.id >= nuevoId) {
+          nuevoId = mascota.id + 1;
+        }
       }
+
+      const nuevaMascota: Mascota = {
+        id: nuevoId,
+        nombre: this.nombre.trim(),
+        especie: this.especie.trim(),
+        edad: this.edad,
+        propietario: this.propietario.trim()
+      };
+
+      this.mascotas.push(nuevaMascota);
+
+      this.mensaje = 'Mascota registrada correctamente';
+
+    } else {
+
+      this.mascotas[this.indiceEditar].nombre =
+        this.nombre.trim();
+
+      this.mascotas[this.indiceEditar].especie =
+        this.especie.trim();
+
+      this.mascotas[this.indiceEditar].edad =
+        this.edad;
+
+      this.mascotas[this.indiceEditar].propietario =
+        this.propietario.trim();
+
+      this.mensaje = 'Mascota actualizada correctamente';
     }
 
-    const nuevaMascota: Mascota = {
-      id: nuevoId,
-      nombre: this.nombre.trim(),
-      especie: this.especie.trim(),
-      edad: this.edad,
-      propietario: this.propietario.trim()
-    };
-
-    this.mascotas.push(nuevaMascota);
     this.guardarEnLocalStorage();
-    this.limpiar();
-
-    this.mensaje = 'Mascota registrada correctamente';
+    this.limpiar(false);
   }
 
-  limpiar() {
+  limpiar(borrarMensaje = true) {
     this.nombre = '';
     this.especie = '';
     this.edad = null;
     this.propietario = '';
+    this.indiceEditar = -1;
+
+    if (borrarMensaje) {
+      this.mensaje = '';
+    }
   }
 
   guardarEnLocalStorage() {
