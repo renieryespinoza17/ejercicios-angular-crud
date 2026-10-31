@@ -144,6 +144,23 @@ export class TareaComponent {
       JSON.stringify(this.tareas)
     );
   }
+  
+eliminar(indice: number) {
+  const confirmar = confirm(
+    '¿Está seguro de eliminar esta tarea?'
+  );
+
+  if (!confirmar) {
+    return;
+  }
+
+  this.tareas.splice(indice, 1);
+  this.guardarEnLocalStorage();
+  this.limpiar();
+
+  this.mensaje = 'Tarea eliminada correctamente';
+}
+
 
   cerrarSesion() {
     localStorage.removeItem('sesionTareas');

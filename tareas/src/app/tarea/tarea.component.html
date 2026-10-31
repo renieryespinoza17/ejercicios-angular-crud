@@ -96,11 +96,17 @@
               <td>{{ tarea.fechaLimite }}</td>
               <td>{{ tarea.estado }}</td>
 
-              <td>
-                <button type="button" (click)="editar(i)">
-                  Editar
-                </button>
-              </td>
+              
+<td>
+  <button type="button" (click)="editar(i)">
+    Editar
+  </button>
+
+  <button type="button" (click)="eliminar(i)">
+    Eliminar
+  </button>
+</td>
+
             </tr>
           }
         </tbody>
