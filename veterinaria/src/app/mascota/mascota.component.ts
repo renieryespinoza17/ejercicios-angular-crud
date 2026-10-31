@@ -148,6 +148,22 @@ export class MascotaComponent {
       JSON.stringify(this.mascotas)
     );
   }
+  
+eliminar(indice: number) {
+  const confirmar = confirm(
+    '¿Está seguro de eliminar esta mascota?'
+  );
+
+  if (!confirmar) {
+    return;
+  }
+
+  this.mascotas.splice(indice, 1);
+  this.guardarEnLocalStorage();
+  this.limpiar();
+
+  this.mensaje = 'Mascota eliminada correctamente';
+}
 
   cerrarSesion() {
     localStorage.removeItem('sesionVeterinaria');
