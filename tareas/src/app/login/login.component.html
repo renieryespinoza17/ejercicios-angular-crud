@@ -1,0 +1,31 @@
+
+<main>
+  <h1>Agenda de Tareas</h1>
+  <h2>Iniciar sesión</h2>
+
+  <form (ngSubmit)="iniciarSesion()">
+
+    <label for="usuario">Usuario</label>
+    <input
+      id="usuario"
+      name="usuario"
+      type="text"
+      [(ngModel)]="usuario"
+      required
+    >
+
+    <label for="clave">Contraseña</label>
+    <input
+      id="clave"
+      name="clave"
+      type="password"
+      [(ngModel)]="clave"
+      required
+    >
+
+    <button type="submit">
+      Ingresar
+    </button>
+
+  </form>
+</main>

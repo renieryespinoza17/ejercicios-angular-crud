@@ -1,0 +1,35 @@
+
+main {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 11px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
