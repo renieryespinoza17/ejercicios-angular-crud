@@ -6,6 +6,61 @@
     Cerrar sesión
   </button>
 
+  <h2>Registrar tarea</h2>
+
+  <form (ngSubmit)="guardar()">
+
+    <label for="titulo">Título</label>
+    <input
+      id="titulo"
+      name="titulo"
+      type="text"
+      [(ngModel)]="titulo"
+      required
+    >
+
+    <label for="descripcion">Descripción</label>
+    <textarea
+      id="descripcion"
+      name="descripcion"
+      [(ngModel)]="descripcion"
+      required
+    ></textarea>
+
+    <label for="fechaLimite">Fecha límite</label>
+    <input
+      id="fechaLimite"
+      name="fechaLimite"
+      type="date"
+      [(ngModel)]="fechaLimite"
+      required
+    >
+
+    <label for="estado">Estado</label>
+    <select
+      id="estado"
+      name="estado"
+      [(ngModel)]="estado"
+      required
+    >
+      <option value="Pendiente">Pendiente</option>
+      <option value="Completada">Completada</option>
+    </select>
+
+    <button type="submit">
+      Guardar
+    </button>
+
+    <button type="button" (click)="limpiar()">
+      Limpiar
+    </button>
+
+  </form>
+
+  @if (mensaje !== '') {
+    <p>{{ mensaje }}</p>
+  }
+
   <h2>Tareas registradas</h2>
 
   <p>Total: {{ tareas.length }}</p>

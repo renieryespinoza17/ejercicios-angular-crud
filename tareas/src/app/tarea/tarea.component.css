@@ -67,3 +67,24 @@ form button {
   margin-top: 15px;
   margin-right: 8px;
 }
+
+textarea,
+select {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+}
+
+textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+select {
+  background-color: white;
+}
+
